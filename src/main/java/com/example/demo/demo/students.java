@@ -1,10 +1,20 @@
 package com.example.demo.demo;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 
+@Table(
+        name = "students",
+        uniqueConstraints = {
+            @UniqueConstraint(name = "student_email", columnNames = "email")
+
+        }
+)
 @Entity
-public class students {
+public class Students {
 
     @Id
     private int id;
@@ -12,13 +22,25 @@ public class students {
     private String address;
     private String phone;
     private int sex;
+    @Column(
+            name = "email",
+            nullable = false,
+            columnDefinition = "Text"
+    )
     private String email;
+    @Column(
+            name = "password",
+            nullable = false
+    )
     private String password;
     private int group_id;
     private int age;
     private String bankNumber;
 
-    public students(int id, String name, String address, String phone, int sex, String email, String password,
+    public Students() {
+    }
+
+    public Students(int id, String name, String address, String phone, int sex, String email, String password,
             int group_id, int age, String bankNumber) {
         this.id = id;
         this.name = name;
